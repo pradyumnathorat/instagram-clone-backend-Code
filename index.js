@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
-const port = 3004;
+const port = 3004 || process.env.PORT;
 const fileupload = require('express-fileupload');
 const postModel = require('./post');
 const path = require('path');
@@ -17,6 +17,10 @@ mongoose.connect(url, (err) => {
         console.log("Connection to mongodb failed")
     }
     else console.log("Connected to mongoDB successfully")
+})
+
+app.get('/', (req, res) => {
+    res.send(`<h1>You are in</h1>`)
 })
 
 app.post("/post", (req, res) => {
